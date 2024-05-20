@@ -1,5 +1,9 @@
 import { Request, Response } from "express";
-import { UsersModel } from "../models/users.model";
+import { UsersService } from "../services/usersService";
+import { UsersRepository } from "../repositories/user.repository";
+
+const usersRepository = new UsersRepository();
+const usersService = new UsersService(usersRepository);
 
 const loginViews = async (req: Request, res: Response) => {
   res.render("index");
@@ -8,12 +12,8 @@ const loginViews = async (req: Request, res: Response) => {
 const loginUsers = async (req: Request, res: Response) => {
   try {
     const { username, password } = req.body;
-    const user = await UsersModel.query().findOne({ username });
+    const user = await usersService.validateUser(username, password);
     if (!user) return res.status(400).json({ message: "user tidak ditemukan" });
-
-    if (user.password !== password)
-      return res.status(400).json({ message: "password salah" });
-
     res.status(200).json({ message: "login berhasil" });
   } catch (err) {
     console.log(err);
