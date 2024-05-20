@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const knex_1 = __importDefault(require("knex"));
 const objection_1 = require("objection");
-const routes_1 = __importDefault(require("./routes"));
+const routes_1 = __importDefault(require("./src/routes"));
 const knexInstance = (0, knex_1.default)({
     client: "pg",
     connection: {

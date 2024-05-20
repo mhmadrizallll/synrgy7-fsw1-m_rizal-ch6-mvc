@@ -1,7 +1,7 @@
 import express, { Express, Response } from "express";
 import knex from "knex";
 import { Model } from "objection";
-import router from "./routes";
+import router from "./src/routes";
 import path from "path";
 
 const knexInstance = knex({
